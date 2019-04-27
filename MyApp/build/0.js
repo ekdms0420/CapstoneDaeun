@@ -2641,7 +2641,13 @@ exports.default = {
             alert(data.level);
             console.log(data.level);
             console.log(data.pressureWarning);
-            this.engineOil = data.level;
+            var vEnginOil = void 0;
+            if (typeof vehicle.engineOil.value.length === 'undefined') {
+              vEnginOil = vehicle.engineOil.value.level;
+            } else {
+              vEnginOil = vehicle.engineOil.value[78140352].level;
+            }
+            this.$data.engineOil = vEnginOil;
           }, function (err) {
             console.log(err);
           });

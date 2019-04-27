@@ -97,9 +97,13 @@ export default {
   //   }
   // },
   mounted () {
-    this.startVehicle()
+    // this.startVehicle()
     this.km = storage.loadEngineOilkm()
-    this.month = storage.loadEngineOilM()
+    // this.month = storage.loadEngineOilM()
+    let date = new Date()
+    var betweenDay = (date.getTime() - storage.loadEngineOilM()) / 1000 / 60 / 60 / 24
+    this.month = Math.floor(betweenDay / 30.4)
+    console.log(date.getTime())
   },
   methods: {
     startVehicle () {
@@ -110,7 +114,15 @@ export default {
             alert(data.level)
             console.log(data.level)
             console.log(data.pressureWarning)
-            this.engineOil = data.level
+            let vEnginOil
+            if (typeof vehicle.engineOil.value.length === 'undefined') {
+              vEnginOil = vehicle.engineOil.value.level
+            } else {
+              vEnginOil = vehicle.engineOil.value[0].level
+            }
+            this.$data.engineOil = vEnginOil
+            // this.engineOil = data.level.value[0].level
+            // this.engineOil = data.pressureWarning
           }, function (err) {
             console.log(err)
           })

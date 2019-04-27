@@ -107,7 +107,9 @@ export default {
   mounted () {
     // this.startVehicle()
     this.km = storage.loadBatterykm()
-    this.month = storage.loadBatteryM()
+    let date = new Date()
+    var betweenDay = (date.getTime() - storage.loadBatteryM()) / 1000 / 60 / 60 / 24
+    this.month = Math.floor(betweenDay / 30.4)
   },
   methods: {
     gomanage (pos) {

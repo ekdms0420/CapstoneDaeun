@@ -106,20 +106,10 @@ export default {
         this.setMonth = 12
       }
       var setDate = new Date(settingDate.year, this.setMonth - 1, settingDate.date)
-      var betweenDay = (date.getTime() - setDate.getTime()) / 1000 / 60 / 60 / 24
-      this.setMonth = Math.floor(betweenDay / 30.4)
+      storage.saveEngineOilM(setDate.getTime())
       storage.saveEngineOilkm(this.distance)
-      storage.saveEngineOilM(this.setMonth)
       storage.saveBatterykm(this.distance)
-      storage.saveBatteryM(this.setMonth)
-      // storage.saveRFTireKm(this.distance)
-      // storage.saveRRTireKm(this.distance)
-      // storage.saveLFTireKm(this.distance)
-      // storage.saveLRTireKm(this.distance)
-      // storage.saveRFTireM(settingDate)
-      // storage.saveRRTireM(settingDate)
-      // storage.saveLFTireM(settingDate)
-      // storage.saveLRTireM(settingDate)
+      storage.saveBatteryM(setDate.getTime())
 
       this.$router.push('/management')
     }
